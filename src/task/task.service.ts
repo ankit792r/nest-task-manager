@@ -2,8 +2,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Task, TaskDocument } from './schemas/task.schema';
 import { Model } from 'mongoose';
 import { EditTaskDto } from './dto/editTask.dto';
-import { ITask } from './interfaces/task';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TaskService {
@@ -13,7 +12,7 @@ export class TaskService {
     return await this.taskModel.create(data);
   }
 
-  async updateTask(taskId: string, data: EditTaskDto): Promise<ITask> {
+  async updateTask(taskId: string, data: EditTaskDto): Promise<Task> {
     const updatedtask = await this.taskModel
       .findByIdAndUpdate(
         taskId,
@@ -25,7 +24,8 @@ export class TaskService {
       .lean()
       .exec();
 
-    if (!updatedtask) throw new Error('Failed to update task');
+    if (!updatedtask)
+      throw new HttpException('Failed to update task', HttpStatus.BAD_REQUEST);
     return updatedtask;
   }
 

@@ -1,11 +1,10 @@
 import { HydratedDocument } from 'mongoose';
-import { ITask } from '../interfaces/task';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-export type TaskDocument = HydratedDocument<ITask>;
+export type TaskDocument = HydratedDocument<Task>;
 
 @Schema({ timestamps: true, versionKey: false })
-export class Task implements ITask {
+export class Task {
   @Prop({ required: true })
   name: string;
 

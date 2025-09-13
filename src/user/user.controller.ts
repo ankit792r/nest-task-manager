@@ -5,13 +5,11 @@ import {
   Get,
   Inject,
   Param,
-  Post,
   Put,
   Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/userUpdate.dto';
 import { IsObjectIdPipe } from '@nestjs/mongoose';
 import { OptionalParseIntPipe } from 'src/lib/pipes/optionalParseInt.pipe';
@@ -31,11 +29,6 @@ export class UserController {
   @Get('byid/:userId')
   getUser(@Param('userId', IsObjectIdPipe) userId: string) {
     return this.userService.getUser(userId);
-  }
-
-  @Post('create')
-  createUser(@Body(ValidationPipe) data: CreateUserDto) {
-    return this.userService.createUser(data);
   }
 
   @Put('update/:userId')
