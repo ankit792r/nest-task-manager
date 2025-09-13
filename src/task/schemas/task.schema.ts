@@ -15,6 +15,9 @@ export class Task {
   @Prop({ default: 'TODO' })
   status: string;
 
+  @Prop({ type: Date })
+  completedAt: Date;
+
   @Prop({ type: Types.ObjectId, ref: 'User' })
   user: User;
 }

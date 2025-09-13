@@ -3,7 +3,6 @@ import { Task, TaskDocument } from './schemas/task.schema';
 import { Model } from 'mongoose';
 import { EditTaskDto } from './dto/editTask.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
 import { UserPayload } from 'src/auth/auth.guard';
 import { Role } from 'src/lib/role.enum';
 
@@ -16,11 +15,14 @@ export class TaskService {
   }
 
   async updateTask(taskId: string, data: EditTaskDto): Promise<Task> {
+    let completedAt: Date | null = null;
+    if (data.status.trim().toLowerCase() == 'done') completedAt = new Date();
+
     const updatedtask = await this.taskModel
       .findByIdAndUpdate(
         taskId,
         {
-          $set: data,
+          $set: { ...data, completedAt },
         },
         { new: true },
       )
@@ -71,5 +73,9 @@ export class TaskService {
         hasPrevPage: page > 1,
       },
     };
+  }
+
+  async getTaskAnalytics() {
+
   }
 }
