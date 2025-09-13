@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtSerice: JwtService,
-  ) {}
+  ) { }
 
   async loginUser(data: LoginDto) {
     const user = await this.userService.getUserByEmail(data.email);
