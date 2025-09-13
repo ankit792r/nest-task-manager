@@ -18,4 +18,4 @@ import { UserModule } from 'src/user/user.module';
   controllers: [AuthController],
   providers: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

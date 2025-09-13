@@ -7,7 +7,7 @@ import { UpdateUserDto } from './dto/userUpdate.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) { }
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async listUsers(page: number = 1, limit: number = 10) {
     const userCountPromise = await this.userModel.countDocuments();

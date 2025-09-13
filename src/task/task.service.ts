@@ -3,12 +3,12 @@ import { Task, TaskDocument } from './schemas/task.schema';
 import { Model } from 'mongoose';
 import { EditTaskDto } from './dto/editTask.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UserPayload } from 'src/auth/auth.guard';
 import { Role } from 'src/lib/role.enum';
+import { UserPayload } from 'src/lib/guards/auth.guard';
 
 @Injectable()
 export class TaskService {
-  constructor(@InjectModel(Task.name) private taskModel: Model<Task>) { }
+  constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
   async createTask(userId: string, data: EditTaskDto): Promise<TaskDocument> {
     return await this.taskModel.create({ ...data, user: userId });
@@ -75,7 +75,5 @@ export class TaskService {
     };
   }
 
-  async getTaskAnalytics() {
-
-  }
+  async getTaskAnalytics() {}
 }

@@ -16,16 +16,16 @@ import { TaskService } from './task.service';
 import { EditTaskDto } from './dto/editTask.dto';
 import { IsObjectIdPipe } from '@nestjs/mongoose';
 import { OptionalParseIntPipe } from 'src/lib/pipes/optionalParseInt.pipe';
-import { AuthGuard, UserPayload } from 'src/auth/auth.guard';
 import { type Request as ExRequest } from 'express';
-import { RoleGuard } from 'src/auth/role.guard';
 import { Roles } from 'src/lib/roles.decorator';
 import { Role } from 'src/lib/role.enum';
+import { AuthGuard, UserPayload } from 'src/lib/guards/auth.guard';
+import { RoleGuard } from 'src/lib/guards/role.guard';
 
 @UseGuards(AuthGuard, RoleGuard)
 @Controller('tasks')
 export class TaskController {
-  constructor(@Inject() private taskService: TaskService) { }
+  constructor(@Inject() private taskService: TaskService) {}
 
   @Get()
   @Roles(Role.Admin, Role.User)

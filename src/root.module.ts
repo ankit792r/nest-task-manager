@@ -27,4 +27,4 @@ import { ThrottlerModule } from '@nestjs/throttler';
     }),
   ],
 })
-export class RootModule { }
+export class RootModule {}

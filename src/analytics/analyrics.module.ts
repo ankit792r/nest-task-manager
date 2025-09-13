@@ -13,4 +13,4 @@ import { AnalyticsController } from './analytics.controller';
   providers: [AnalyticsService],
   controllers: [AnalyticsController],
 })
-export class AnalyticsModule { }
+export class AnalyticsModule {}

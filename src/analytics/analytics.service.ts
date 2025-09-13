@@ -17,7 +17,7 @@ export class AnalyticsService {
   constructor(
     @InjectModel(Task.name) private taskModel: Model<Task>,
     @InjectModel(User.name) private userModel: Model<User>,
-  ) { }
+  ) {}
 
   async getTaskAnalytics() {
     const taskPerStatusCountPromise = this.taskModel.aggregate([

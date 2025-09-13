@@ -13,4 +13,4 @@ import { UserModule } from 'src/user/user.module';
   providers: [TaskService],
   controllers: [TaskController],
 })
-export class TaskModule { }
+export class TaskModule {}

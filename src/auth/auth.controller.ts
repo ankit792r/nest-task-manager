@@ -9,7 +9,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-  ) { }
+  ) {}
 
   @Post('login')
   login(@Body(ValidationPipe) data: LoginDto) {

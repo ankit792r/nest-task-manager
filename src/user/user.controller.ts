@@ -16,7 +16,7 @@ import { OptionalParseIntPipe } from 'src/lib/pipes/optionalParseInt.pipe';
 
 @Controller('users')
 export class UserController {
-  constructor(@Inject() private userService: UserService) { }
+  constructor(@Inject() private userService: UserService) {}
 
   @Get('list')
   listUsers(

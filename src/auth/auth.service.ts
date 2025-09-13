@@ -2,14 +2,14 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
-import { UserPayload } from './auth.guard';
+import { UserPayload } from 'src/lib/guards/auth.guard';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtSerice: JwtService,
-  ) { }
+  ) {}
 
   async loginUser(data: LoginDto) {
     const user = await this.userService.getUserByEmail(data.email);
