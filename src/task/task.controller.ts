@@ -27,7 +27,7 @@ import { Role } from 'src/lib/role.enum';
 export class TaskController {
   constructor(@Inject() private taskService: TaskService) { }
 
-  @Get('list')
+  @Get()
   @Roles(Role.Admin, Role.User)
   listTasks(
     @Request() req: ExRequest,
@@ -39,7 +39,7 @@ export class TaskController {
     return this.taskService.listTasks(userPayload, page, limit, status);
   }
 
-  @Post('create')
+  @Post()
   @Roles(Role.User)
   createTask(
     @Request() req: ExRequest,
@@ -49,7 +49,7 @@ export class TaskController {
     return this.taskService.createTask(userPayload._id, data);
   }
 
-  @Put('update/:taskId')
+  @Put(':taskId')
   @Roles(Role.Admin, Role.User)
   updateTask(
     @Param('taskId', IsObjectIdPipe) taskId: string,
@@ -59,7 +59,7 @@ export class TaskController {
   }
 
   @Roles(Role.User, Role.Admin)
-  @Delete('delete/:taskId')
+  @Delete(':taskId')
   deleteTask(@Param('taskId', IsObjectIdPipe) taskId: string) {
     return this.taskService.deleteTask(taskId);
   }
