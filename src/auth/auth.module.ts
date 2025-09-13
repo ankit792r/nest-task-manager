@@ -8,7 +8,7 @@ import { UserModule } from 'src/user/user.module';
     UserModule,
     JwtModule.register({
       global: true,
-      secret: 'temp secret',
+      secret: process.env.JWT_SECRET,
       signOptions: {
         algorithm: 'HS256',
         expiresIn: '5000s',

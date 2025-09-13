@@ -1,0 +1,29 @@
+name: task-manager
+
+services:
+  nest-api:
+    image: ankit8424/nest-task-manager:latest
+    container_name: nest-api
+    ports:
+      - '8000:8000'
+    env:
+      PORT=8000
+      NODE_ENV=production
+      JWT_SECRET=thisismystrongkey
+      MONGO_URL=mongodb://mongodb:27017/task-manager
+    depends_on:
+      - mongodb
+    restart: on-failure
+    command: node dist/main.js
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
