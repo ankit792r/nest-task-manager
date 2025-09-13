@@ -39,7 +39,6 @@ export class UserService {
     const user = await this.userModel
       .findById(userId)
       .select('-password')
-      .lean()
       .exec();
 
     if (!user)

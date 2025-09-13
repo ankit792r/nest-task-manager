@@ -3,13 +3,16 @@ import { Task, TaskDocument } from './schemas/task.schema';
 import { Model } from 'mongoose';
 import { EditTaskDto } from './dto/editTask.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { UserService } from 'src/user/user.service';
+import { UserPayload } from 'src/auth/auth.guard';
+import { Role } from 'src/lib/role.enum';
 
 @Injectable()
 export class TaskService {
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) { }
 
-  async createTask(data: EditTaskDto): Promise<TaskDocument> {
-    return await this.taskModel.create(data);
+  async createTask(userId: string, data: EditTaskDto): Promise<TaskDocument> {
+    return await this.taskModel.create({ ...data, user: userId });
   }
 
   async updateTask(taskId: string, data: EditTaskDto): Promise<Task> {
@@ -34,9 +37,17 @@ export class TaskService {
     return taskId;
   }
 
-  async listTasks(page: number = 1, limit: number = 10, status?: string) {
+  async listTasks(
+    userPayload: UserPayload,
+    page: number = 1,
+    limit: number = 10,
+    status?: string,
+  ) {
     const filter: Record<string, unknown> = {};
     if (status) filter['status'] = status;
+
+    if (userPayload.role == Role.User.toString())
+      filter['user'] = userPayload._id;
 
     const countPromise = this.taskModel.countDocuments(filter);
     const tasksPromise = this.taskModel

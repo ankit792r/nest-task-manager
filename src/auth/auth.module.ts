@@ -11,7 +11,7 @@ import { UserModule } from 'src/user/user.module';
       secret: 'temp secret',
       signOptions: {
         algorithm: 'HS256',
-        expiresIn: '500s',
+        expiresIn: '5000s',
       },
     }),
   ],
