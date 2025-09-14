@@ -6,6 +6,32 @@ A Task Manager REST API built with **NestJS** and **MongoDB**.
 
 ## ⚙️ Setup Instructions
 
+### 🐳 Docker Setup
+
+
+1. **Pull Images and start containers**
+   ```bash
+   docker compose -f docker-compose-prod.yaml up -d
+   ```
+
+    #### OR
+
+2. **Environment Variables**
+   ```bash
+   NODE_ENV=development
+   PORT=8000
+   JWT_SECRET=thisismystrongkey
+   MONGO_URL=mongodb://localhost:27017/task-manager
+   ```
+   add above lines in ```.env``` file.
+
+3. **Build and start containers**
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+
 ### 🔧 Local Setup
 
 1. **Clone the Repository**
@@ -27,24 +53,6 @@ A Task Manager REST API built with **NestJS** and **MongoDB**.
 4. **Run the App**
    ```bash
    npm run start:dev
-   ```
-
-### 🐳 Docker Setup
-
-1. **Build and start containers**
-
-   ```bash
-   docker compose up -d --build
-   ```
-
-   The API will be available at http://localhost:8000
-   Environment Variables are handled automatically via .env and docker-compose.yml.
-
-   #### OR
-
-2. **Pull Images and start containers**
-   ```bash
-   docker compose -f docker-compose-prod.yaml up -d
    ```
 
 ## ✨ Features
