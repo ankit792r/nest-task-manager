@@ -58,7 +58,7 @@ A Task Manager REST API built with **NestJS** and **MongoDB**.
 
 - 🔐 JWT Authentication: Register/Login and secure access to personal data.
 - ✅ Manage Own Tasks: Create, view, update, and delete personal tasks.
-- 📄 Task Status Filtering: Filter tasks by status (e.g., Pending, In Progress, Completed).
+- 📄 Task Status Filtering: Filter tasks by status (e.g., Todo, In Progress, Done).
 - 📊 Pagination: Get tasks in paginated format for performance.
 - 🔁 Rate Limiting: Prevent abuse by limiting repeated requests.
 
