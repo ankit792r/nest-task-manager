@@ -6,7 +6,7 @@ import { AuthGuard } from 'src/lib/guards/auth.guard';
 import { RoleGuard } from 'src/lib/guards/role.guard';
 import { ApiBearerAuth, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
-@ApiBearerAuth()
+@ApiBearerAuth('access-token')
 @UseGuards(AuthGuard, RoleGuard)
 @Roles(Role.Admin)
 @Controller('analytics')

@@ -4,7 +4,7 @@ import { Role } from 'src/lib/role.enum';
 
 export type UserDocument = User & Document;
 
-@Schema()
+@Schema({ versionKey: false })
 export class User {
   @Prop({ required: true })
   name: string;

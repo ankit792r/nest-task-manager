@@ -29,7 +29,7 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 
-@ApiBearerAuth()
+@ApiBearerAuth('access-token')
 @UseGuards(AuthGuard, RoleGuard)
 @Controller('tasks')
 export class TaskController {

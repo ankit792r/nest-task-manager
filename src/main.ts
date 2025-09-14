@@ -24,11 +24,11 @@ async function bootstrap() {
       {
         bearerFormat: 'Bearer',
         type: 'http',
-        scheme: 'Bearer',
+        scheme: 'bearer',
         in: 'Header',
-        name: 'Jwt Auth',
+        name: 'Authorization',
       },
-      'JWTAuthorization',
+      'access-token',
     )
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);

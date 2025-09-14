@@ -7,7 +7,7 @@ import { UpdateUserDto } from './dto/userUpdate.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) { }
 
   async listUsers(page: number = 1, limit: number = 10) {
     const userCountPromise = await this.userModel.countDocuments();
@@ -53,11 +53,17 @@ export class UserService {
     return user;
   }
 
-  async createUser(data: CreateUserDto): Promise<UserDocument> {
+  async createUser(
+    data: CreateUserDto,
+    admin: boolean = false,
+  ): Promise<UserDocument> {
     const existingUser = await this.userModel.findOne({ email: data.email });
     if (existingUser)
       throw new HttpException('User alredy exists', HttpStatus.BAD_REQUEST);
-    const newUser = await this.userModel.create(data);
+    const newUser = await this.userModel.create({
+      ...data,
+      role: admin ? 'admin' : 'user',
+    });
     newUser.password = '';
     return newUser;
   }
